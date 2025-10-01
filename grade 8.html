@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 8 Student Result Form</title>
+    <style>
+        body{
+            font-family:sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container{
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            width: 500px;
+        
+        }
+        h2{
+            text-align: center;
+            color: #333333;
+            background-color: rgb(26, 171, 171);
+            text-decoration-color: #4CAF50;
+
+        }
+        .form-group{
+            margin-bottom: 15px;
+        }
+        label{
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+
+        }
+        input[type="text"]
+        {
+            width: 100%;
+            padding: 10px;
+            border: 1px sold #ccc;
+            box-sizing: border-box;
+            font-size: 16px;
+
+        }
+        button{
+            background-color: #4CAF50;
+            color:#fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover{
+            background-color: #3e8e3e;
+            color: rgb(219, 23, 23);
+        } 
+        .result{
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: left;
+        }
+.error{
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+    </style>
+</head>
+<body>
+   <div class="container">
+<h2>Grade 8 Student Result Form</h2>
+<form id="searchform">
+
+    <div class="form-group">
+        <label for="studentId">studentId:</label>
+        <input type="text" id="studentId" name="studentId" placeholder="Enter student ID" required>
+<div class="error" id="iderror"></div>
+    </div>
+
+    <div class="form-group">
+    <label for="firstname">firstName:</label>
+    <input type="text" id="firstName" name="firstName" placeholder="Enter first Name"required>
+    <div class="error" id="nameerror"></div>
+        </div>
+        <button type="submit">Show Result</button>
+</form>
+<div class="result" id="resultsection" style="display: none;">
+    <h3>Result:</h3>
+    <p><strong>Student Name:</strong><span id="StudentName"></span></p>
+    <p><strong>maths Marks:</strong><span id="mathsMark"></span></p>
+    <p><strong>General_science Marks:</strong><span id="general-scienceMarks"></span></p>
+    <p><strong>Amharic Marks:</strong><span id="AmharicMarks"></span></p>
+    <p><strong>English Marks:</strong><span id="EnglishMarks"></span></p>
+    <p><strong>Gedeoffa Marks:</strong><span id="GedeoffaMark"></span></p>
+    <p><strong>citizens Marks:</strong><span id="citizensMark"></span></p>
+    <p><strong>social_science Marks:</strong><span id="social-scienceMark"></span></p>
+    <p><strong>average Marks:</strong><span id="averageMarks"></span></p>
+     <p><strong>Grade:</strong><span id="grade"></span></p>
+</div>
+   </div> 
+   <script>
+    const studentData = [
+        {
+            id:12345,firstName: "desalegn", maths: 85, General: 70, Amharic: 90, English: 80, Gedeoffa:95, citizen: 85, social_science: 85
+        },
+        {
+            id:22345,firstName: "teketel", maths: 85,General_science: 60, Amharic: 95, English: 85, Gedeoffa:90, citizens: 80, social_science: 85
+        },
+        {
+            id:32345,firstName: "abayne", maths: 95,General_science: 80, Amharic: 90, English: 85, Gedeoffa:95, citizen: 85, social_science: 85
+        },
+        {
+            id:42345,firstName: "belay", maths: 85,General_science: 80, Amharic: 95, English: 85, Gedeoffa:95, citizen: 85, social_science: 85
+        },
+
+{
+            id:52345,firstName: "ayele", maths: 85,General_science: 80, Amharic: 60, English: 40, Gedeoffa:95, citizen: 85, social_science: 85
+        },
+        {
+            id:62345,firstName: "abebe", maths: 95,General_science: 70, Amharic: 50, English: 70, Gedeoffa:95, citizen: 85, social_science: 85
+        },
+        {
+            id:72345,firstName: "feben", maths: 65,General_science: 40, Amharic: 70, English: 80, Gedeoffa:65, citizen: 65, social_science: 85
+        },
+        {
+            id:82345,firstName: "andualem", maths: 45,General_science: 30, Amharic: 90, English: 80, Gedeoffa:95, citizen: 85, social_science: 85
+        },
+        {
+            id:92345,firstName: "asichalehu", maths: 75,General_science: 50, Amharic: 30, English: 60, Gedeoffa:35, citizen: 55, social_science: 85
+        },
+        {
+            id:11345,firstName: "melese", maths: 55,General_science: 30, Amharic: 50, English: 20, Gedeoffa:55, citizen: 85, social_science: 85
+        },
+        {
+            id:122345,firstName: "beiment", maths: 85,General_science: 60, Amharic: 90, English: 85, Gedeoffa:60, citizen: 85, social_science: 85
+        },
+        {
+            id:13345,firstName: "habtamu", maths: 86,General_science: 60, Amharic: 50, English: 40, Gedeoffa:95, citizen: 85, social_science: 85
+        },
+
+    ];
+    document.getElementById('searchform').addEventListener('submit',function(event) {
+        
+    
+    {
+
+    event.preventDefault();
+    document.getElementById('iderror').textContent='';
+    document.getElementById('nameerror').textContent='';
+    const studentId=document.getElementById('studentId').value.trim();
+    const firstName=document.getElementById('firstName').value.trim();
+    let isvalid=true;
+    if(studentId==='')
+    {
+        document.getElementById('iderror').textContent='Student ID is required';
+        isvalid=false;
+    }
+    if(firstName==='')
+    {
+        document.getElementById('nameerror').textContent='First name is required';
+        isvalid=false;
+    }
+    if(isvalid)
+    {
+        const student=studentData.find(student=>student.id===studentId&&student.firstName.toLowerCase()===firstName.toLowerCase());
+        if(student)
+    {
+        const average=(student.maths+student.Amharic+student.English+student.Gedeoffa+student.General_science+student.social_science+student.citizen+student)/7;
+    
+    let grade='';
+    if(average>=90)
+    {
+        Grade='A+';
+    }
+    else if(average>=80)
+    {
+      Grade='A' ; 
+    }
+    else if(average>=70)
+    {
+        Greade='B';
+    }
+    else if(average>=60)
+    {
+        Grade='C';
+    }
+    else if(average>=50){
+        Grade='D';
+    }
+    else
+    {
+        Grade='Fail';
+    }
+    document.getElementById('studentName').textContent=firstName;
+    document.getElementById('mathsMarks').textContent=student.maths;
+    document.getElementById('GeneralMarks').textContent=student.General_science;
+    document.getElementById('EnglishMarks').textContent=student.English;
+    document.getElementById('AmharicMarks').textContent=student.Amharic;
+    document.getElementById('social_science').textContent=student.social_science;
+    document.getElementById('GedeoffaMarks').textContent=student.Gedeoffa;
+    document.getElementById('CitizenMarks').textContent=student.citizen;
+    document.getElementById('averageMarks').textContent=average.toFixed(2);
+    document.getElementById('Grade').textContent=grade;
+    document.getElementById('resultsection').style.display='block';
+    }
+    else{
+        alert('Student not found');
+        document.getElementById('resultsection').style.display=none;
+    }
+}
+else{
+    document.getElementById('resultsection').style.display=none;
+}
+    });
+   </script>
+</body>
+</html>
